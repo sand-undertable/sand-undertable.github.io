@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Copier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            margin: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            background: #1f1f1f;
+            padding: 10px;
+        }
+
+        .tab {
+            margin-right: 15px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        .tab:hover {
+            background: #333;
+        }
+
+        .active {
+            background: #555;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 20px;
+        }
+
+        .show {
+            display: block;
+        }
+
+        /* Buttons */
+        .copy-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7dff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #1a5edb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="tab active" onclick="openPage('home', this)">Home</div>
+        <div class="tab" onclick="openPage('codes', this)">Codes</div>
+    </div>
+
+    <!-- Pages -->
+    <div id="home" class="page show">
+        <h1>Welcome</h1>
+        <p>click the codes tab to grab some epic strings</p>
+    </div>
+
+    <div id="codes" class="page">
+        <h1>Copy Codes</h1>
+
+        <button class="copy-btn" onclick="copyText('CODE_12345')">
+            Copy CODE_12345
+        </button>
+
+        <button class="copy-btn" onclick="copyText('HELLO_WORLD')">
+            Copy HELLO_WORLD
+        </button>
+
+        <button class="copy-btn" onclick="copyText('SECRET_KEY_999')">
+            Copy SECRET_KEY_999
+        </button>
+
+    </div>
+
+    <script>
+        function openPage(pageId, element) {
+            // hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
+
+            // remove active from tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+            // show selected page
+            document.getElementById(pageId).classList.add('show');
+            element.classList.add('active');
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied: " + text);
+            }).catch(err => {
+                alert("Failed to copy");
+            });
+        }
+    </script>
+
+</body>
+</html>
